@@ -1,0 +1,367 @@
+﻿<Application x:Class="SourceCounterEx.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SourceCounterEx"
+             xmlns:localcon="clr-namespace:SourceCounterEx.Converter"
+             xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options" 
+             StartupUri="View\MainWindow.xaml"
+             xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+            <System:Double x:Key="NormalFontSize">12</System:Double>
+            <System:Double x:Key="MenuFontSize">12</System:Double>
+            <System:Double x:Key="ContextMenuFontSize">12</System:Double>
+            <System:Double x:Key="TreeViewLeafFontSize">11</System:Double>
+            <System:Double x:Key="ResultFontSize">12</System:Double>
+            <SolidColorBrush x:Key="BorderLine" Color="#9eb4db"/>
+            <System:Double x:Key="TabItemFontSize">16</System:Double>
+
+            <BooleanToVisibilityConverter x:Key="boolToVisibility"/>
+            <localcon:ColSpanValueConverter x:Key="ColSpanValueConverter"/>
+
+            <!--<ImageBrush x:Key="MySteelBrushResource"
+      ImageSource="Images\steel.png" TileMode="Tile" 
+      Viewport="0,0,500,300" ViewportUnits="Absolute"
+      presentationOptions:Freeze="True" />-->
+      
+
+            <ImageBrush x:Key="MyCloudyGlassBrushResource"
+      ImageSource="Images\clouds.png" 
+      Viewport="0,0,300,300" ViewportUnits="Absolute"
+      TileMode="FlipXY" 
+      presentationOptions:Freeze="True" />
+            
+
+            <!--Treeview Style-->
+            <GradientStopCollection x:Key="GlassGradientStops"
+                    presentationOptions:Freeze="True">
+                            <GradientStop Color="WhiteSmoke" Offset="0.2" />
+                            <GradientStop Color="Transparent" Offset="0.4" />
+                            <GradientStop Color="WhiteSmoke" Offset="0.5" />
+                            <GradientStop Color="Transparent" Offset="0.75" />
+                            <GradientStop Color="WhiteSmoke" Offset="0.9" />
+                            <GradientStop Color="Transparent" Offset="1" />
+            </GradientStopCollection>
+            
+            <LinearGradientBrush x:Key="GlassBrushResource" StartPoint="0,0" EndPoint="1,1" Opacity="0.75" 
+                  GradientStops="{StaticResource GlassGradientStops}" 
+                  presentationOptions:Freeze="True" />
+            
+            <Style x:Key="ExpandCollapseToggleStyle"
+              TargetType="{x:Type ToggleButton}">
+                <Setter Property="Focusable"
+              Value="False"/>
+                <Setter Property="MinWidth"
+              Value="19"/>
+                <Setter Property="MinHeight"
+              Value="13"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border MinWidth="19"
+                    MinHeight="13"
+                    Background="{StaticResource GlassBrushResource}">
+                                <Border MinWidth="9"
+                      MinHeight="9"
+                      BorderThickness="1"
+                      BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                      Background="Transparent"
+                      SnapsToDevicePixels="true">
+                                    <Path x:Name="ExpandPath"
+                  Stretch="Uniform"
+                      Margin="1,1,1,1"
+                      Fill="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"
+                      Data="M 0 2 L 0 3 L 2 3 L 2 5 L 3 5 L 3 3 L 5 3 L 5 2 L 3 2 L 3 0 L 2 0 L 2 2 Z"/>
+                                    <Border.BitmapEffect>
+                                        <DropShadowBitmapEffect />
+                                    </Border.BitmapEffect>
+                                </Border>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked"
+                       Value="True">
+                                    <Setter Property="Data"
+                        TargetName="ExpandPath"
+                        Value="M 0 2 L 0 3 L 5 3 L 5 2 Z"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            <Style x:Key="TreeViewItemHeaderStyle" TargetType="{x:Type TreeViewItem}" >
+                <Setter Property="Margin" Value="2, 2, 2, 0" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Offset="0.0" Color="#22cc99ff" />
+                            <GradientStop Offset="1.0" Color="#37cc99ff" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Rectangle x:Name="outerRectangle" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                Fill="{TemplateBinding Background}" RadiusX="10" RadiusY="10" 
+                StrokeThickness="5" Grid.ColumnSpan="2" Opacity="1" />
+
+                                <Rectangle x:Name="glassCube" 
+                Grid.ColumnSpan="2" HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch"
+                StrokeThickness="1" RadiusX="10" RadiusY="10" Opacity="0">
+                                    <Rectangle.Fill>
+                                        <ImageBrush x:Name="glassCubeBrush"
+                    ImageSource="Images\clouds.png" 
+                    Viewport="0,0,300,300" ViewportUnits="Absolute"
+                    TileMode="FlipXY" />
+                                    </Rectangle.Fill>
+                                    <Rectangle.Stroke>
+                                        <LinearGradientBrush StartPoint="0.5,0.0" EndPoint="0.5,1.0">
+                                            <GradientStop Color="Transparent" Offset="0" />
+                                            <GradientStop Color="Gray" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Rectangle.Stroke>
+
+                                    <Rectangle.BitmapEffect>
+                                        <BitmapEffectGroup>
+                                            <OuterGlowBitmapEffect x:Name="glowBitmapEffect" GlowColor="Gray" />
+                                            <BevelBitmapEffect BevelWidth="1" />
+                                        </BitmapEffectGroup>
+                                    </Rectangle.BitmapEffect>
+                                </Rectangle>
+
+                                <ToggleButton 
+                Name="ExpanderIcon"
+                Grid.Row="0" Grid.Column="0"
+                Style="{StaticResource ExpandCollapseToggleStyle}"
+                IsChecked="{Binding Path=IsExpanded,RelativeSource={RelativeSource TemplatedParent}}"
+                ClickMode="Press" />
+
+                           
+                                <ContentPresenter 
+                Name="PART_Header" Grid.Column="1" Margin="10,5,10,5" 
+                TextBlock.Foreground="Black"
+                ContentSource="Header" />
+
+                                <ToggleButton 
+                Name="Expander"   
+               Grid.Column="0" Grid.ColumnSpan="2"
+               Visibility="Visible"
+               IsChecked="{Binding Path=IsExpanded,RelativeSource={RelativeSource TemplatedParent}}"
+               ClickMode="Press">
+                                    <ToggleButton.Template>
+                                        <ControlTemplate>
+                                            <Rectangle Fill="Transparent" />
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+
+                                </ToggleButton>
+
+                                <ItemsPresenter x:Name="ItemsHost"
+                 Grid.Row="1"
+                 Grid.Column="1" />
+
+                            </Grid>
+                            <ControlTemplate.Triggers>
+
+
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="true" />
+                                        <Condition Property="IsSelected" Value="False" />
+                                    </MultiTrigger.Conditions>
+
+                                    <MultiTrigger.EnterActions>
+                                        <RemoveStoryboard BeginStoryboardName="UncheckedBeginStoryboard" />
+                                        <BeginStoryboard Name="MouseOverBeginStoryboard">
+                                            <Storyboard>
+                                                <DoubleAnimation 
+                        Storyboard.TargetName="glassCube"
+                        Storyboard.TargetProperty="Opacity"
+                        To="0.75"
+                        Duration="0:0:0.1" />
+                                                <DoubleAnimation 
+                        Storyboard.TargetName="glassCubeBrush"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0.75" To="0.5" AutoReverse="True"
+                        RepeatBehavior="Forever"
+                        Duration="0:0:0.75" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </MultiTrigger.EnterActions>
+                                    <MultiTrigger.ExitActions>
+                                        <RemoveStoryboard BeginStoryboardName="MouseOverBeginStoryboard" />
+
+                                    </MultiTrigger.ExitActions>
+                                </MultiTrigger>
+
+                                <EventTrigger RoutedEvent="TreeViewItem.Selected">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation 
+                      Storyboard.TargetName="glassCube"
+                      Storyboard.TargetProperty="Opacity"
+                      To="0.75" 
+                      Duration="0:0:0.1" />
+                                            <DoubleAnimation 
+                      Storyboard.TargetName="glassCube"
+                      Storyboard.TargetProperty="StrokeThickness"
+                      To="2"
+                      Duration="0:0:0.1" />
+                                            <ColorAnimation 
+                      Storyboard.TargetName="glowBitmapEffect"
+                      Storyboard.TargetProperty="GlowColor"
+                      To="{x:Static SystemColors.HighlightColor}"
+                      Duration="0:0:1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="TreeViewItem.Unselected">
+                                    <BeginStoryboard Name="UncheckedBeginStoryboard">
+                                        <Storyboard>
+                                            <DoubleAnimation 
+                      Storyboard.TargetName="glassCube"
+                      Storyboard.TargetProperty="Opacity"
+                      To="0"
+                      Duration="0:0:0.1" />
+                                            <DoubleAnimation 
+                      Storyboard.TargetName="glassCube"
+                      Storyboard.TargetProperty="StrokeThickness"
+                      To="1"
+                      Duration="0:0:0.1" />
+                                            <ColorAnimation 
+                      Storyboard.TargetName="glowBitmapEffect"
+                      Storyboard.TargetProperty="GlowColor"
+                      To="{x:Static SystemColors.ControlColor}"
+                      Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <Trigger Property="IsFocused" Value="true">
+                                    <Setter Property="Rectangle.Stroke" 
+                    Value="{x:Static SystemColors.HighlightBrush}" 
+                    TargetName="outerRectangle" />
+                                    <Setter Property="Rectangle.Opacity" Value="1" TargetName="glassCube" />
+                                </Trigger>
+
+                                <Trigger Property="IsExpanded" Value="false">
+                                    <Setter TargetName="ItemsHost"
+                        Property="Visibility"
+                        Value="Collapsed"/>
+
+                                </Trigger>
+                                <Trigger Property="HasItems"
+                       Value="False">
+                                    <Setter TargetName="Expander"
+                        Property="Visibility"
+                        Value="Hidden"/>
+                                    <Setter TargetName="ExpanderIcon"
+                        Property="Visibility"
+                        Value="Hidden"/>
+                                    
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            <!--FlowDocument Style -->
+            <Style x:Key="HeaderStyle">
+                <Setter Property="Paragraph.FontFamily" Value="Meiryo UI" />
+                <Setter Property="Paragraph.FontWeight" Value="Bold" />
+                <Setter Property="Paragraph.FontSize" Value="15" />
+                <Setter Property="Paragraph.Margin" Value="5" />
+                <Setter Property="Paragraph.TextAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="TitleStyle">
+                <Setter Property="Paragraph.FontFamily" Value="Meiryo UI" />
+                <Setter Property="Paragraph.FontSize" Value="12" />
+                <Setter Property="Paragraph.Margin" Value="15,15,0,0" />
+            </Style>
+
+            <Style x:Key="IndetStyle">
+                <Setter Property="Paragraph.FontFamily" Value="Meiryo UI" />
+                <Setter Property="Paragraph.Margin" Value="15,10,0,0" />
+            </Style>
+            
+
+            <Style x:Key="FileLineStyle">
+                <Setter Property="Paragraph.FontFamily" Value="Meiryo UI" />
+                <Setter Property="Paragraph.FontWeight" Value="Normal" />
+                <Setter Property="Paragraph.FontSize" Value="14" />
+                <Setter Property="Paragraph.Background" Value="Yellow"/>
+                
+            </Style>
+
+            <Style x:Key="CodeLineStyle">
+                <Setter Property="Paragraph.FontFamily" Value="Meiryo UI" />
+                <Setter Property="Paragraph.FontWeight" Value="Normal" />
+                <Setter Property="Paragraph.FontSize" Value="12" />
+                <Setter Property="Paragraph.TextIndent" Value="15"/>
+
+            </Style>
+
+            <Style x:Key="CommentLineStyle">
+                <Setter Property="Paragraph.FontFamily" Value="Meiryo UI" />
+                <Setter Property="Paragraph.FontWeight" Value="Normal" />
+                <Setter Property="Paragraph.FontSize" Value="12" />
+                <Setter Property="Paragraph.TextIndent" Value="15"/>
+                <Setter Property="Paragraph.Foreground" Value="Green"/>
+
+            </Style>
+
+            <Style x:Key="BylineStyle">
+                <Setter Property="Paragraph.FontFamily" Value="Meiryo UI" />
+                <Setter Property="Paragraph.FontWeight" Value="Normal" />
+                <Setter Property="Paragraph.FontStyle" Value="Italic" />
+                <Setter Property="Paragraph.FontSize" Value="10" />
+                <Setter Property="Paragraph.TextAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="DateStyle">
+                <Setter Property="Paragraph.FontFamily" Value="Meiryo UI" />
+                <Setter Property="Paragraph.FontWeight" Value="Bold" />
+                <Setter Property="Paragraph.FontStyle" Value="Italic" />
+                <Setter Property="Paragraph.FontSize" Value="14" />
+                <Setter Property="Paragraph.Margin" Value="2" />
+                <Setter Property="Paragraph.TextAlignment" Value="Center" />
+            </Style>
+         
+
+            <Style x:Key="MainContentStyle">
+                <Setter Property="Paragraph.FontFamily" Value="Meiryo UI" />
+                <Setter Property="Paragraph.FontSize" Value="11" />
+                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                <Setter Property="Paragraph.Margin" Value="5,10,5,10" />
+            </Style>
+
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,233 @@
+﻿<UserControl x:Class="SourceCounterEx.View.NaviView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local ="clr-namespace:SourceCounterEx.Extension"
+             mc:Ignorable="d" 
+             d:DesignHeight="600"
+             d:DesignWidth="800"
+             >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Thickness x:Key="ControlMargin">0 9 0 0</Thickness>
+
+            <XmlDataProvider x:Key="Components" XPath="Examples" >
+                <x:XData>
+                    <Components xmlns="">
+
+                        <Component>
+                            <Name>bjSAL1200</Name>
+                            <Changes>
+                                <Change>
+                                    <No>[PKG6]-001</No>
+                                    <Row1>2010/03/08 ICSS(沈) PKGｶｽﾀﾏｲｽﾞ1次(ｱﾅﾛｸﾞ停波対応)</Row1>
+                                    <Row2>変更内容：共通定数削除に伴う対応</Row2>
+                                    <Row3>修正箇所：bjSAL1200.java</Row3>
+                                    <Row4>備考　　：PKGｶｽﾄ_営業_03ｾｰﾙｽ枠設定Ver1_3</Row4>                                    
+                                </Change>
+
+                                <Change>
+                                    <No>[PKG6]-002</No>
+                                    <Row1>2010/03/08 ICSS(沈) PKGｶｽﾀﾏｲｽﾞ1次(共通強化項目対応)</Row1>
+                                    <Row2>変更内容：時間取禁止業種設定</Row2>
+                                    <Row3>修正箇所：bjSAL1200.java</Row3>
+                                    <Row4>備考　　：PKGｶｽﾄ_営業_03ｾｰﾙｽ枠設定Ver1_3</Row4>
+                                </Change>
+                                
+                            </Changes>
+                        </Component>
+
+                        <Component>
+                            <Name>udSZI1000</Name>
+                            <Changes>
+                                <Change>
+                                    <No>[PKG6]-001</No>
+                                    <Row1>2010/02/02  ICSS(chenxin)　共通-035</Row1>
+                                    <Row2>変更内容：xmlﾌｧｲﾙの設定値により、既存ﾃﾞｰﾀが書き換わる</Row2>
+                                    <Row3>修正箇所：fmSZI0100.vb、fmSZI0100.Designer.vb</Row3>
+                                    <Row4>備考　　：横展開</Row4>
+                                </Change>
+
+                                <Change>
+                                    <No>[PKG6]-002</No>
+                                    <Row1>2010/03/08  ICSS(chenxin)　PKGｶｽﾀﾏｲｽﾞ1次(機能要件対応)</Row1>
+                                    <Row2>変更内容：オンエア条件の使用可能帯域は不要</Row2>
+                                    <Row3>修正箇所：fmSZI1000.vb、fmSZI1000.Designer.vb</Row3>
+                                    <Row4>備考　　：PKGｶｽﾄ_放送_01CMﾊﾞﾝｸ素材設定Ver1_2</Row4>
+                                </Change>
+
+                            </Changes>
+                        </Component>
+                    </Components>
+               
+                </x:XData>
+            </XmlDataProvider>
+
+            <LinearGradientBrush x:Key="DashLine" SpreadMethod="Repeat" StartPoint="0,5" EndPoint="5,0" MappingMode="Absolute">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="Gray" Offset="0"/>
+                    <GradientStop Color="Gray" Offset="0.2"/>
+                    <GradientStop Color="Transparent" Offset="0.4"/>
+                    <GradientStop Color="Transparent" Offset="0.6"/>
+                    <GradientStop Color="Gray" Offset="0.8"/>
+                    <GradientStop Color="Gray" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+
+            <HierarchicalDataTemplate x:Key="ExamplesDataTemplate"
+                 ItemsSource="{Binding Changes}">
+
+                <TextBlock Text="{Binding ComponentName}"  ToolTip="{Binding ComponentName}" FontWeight="Bold"/>
+                
+                <HierarchicalDataTemplate.ItemTemplate>
+                    <DataTemplate>
+                        
+
+                            <StackPanel>
+                                <TextBlock  Text="{Binding No}" Foreground="Blue"/>
+                                <TextBlock  Text="{Binding Row1}" ToolTip="{Binding Row1}" />
+                                <TextBlock  Text="{Binding Row2}" ToolTip="{Binding Row2}" />
+                                <TextBlock  Text="{Binding Row3}" ToolTip="{Binding Row3}" />
+                                <TextBlock  Text="{Binding Row4}" ToolTip="{Binding Row4}" />
+                            </StackPanel>
+                        
+
+                    </DataTemplate>
+                </HierarchicalDataTemplate.ItemTemplate>
+            </HierarchicalDataTemplate>
+            
+
+        </ResourceDictionary>
+        
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
+
+        <Border BorderThickness="1" BorderBrush="{StaticResource BorderLine}"  Grid.Row="0"  Margin="1">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            
+            <StackPanel  Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal" >
+                    <Button Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Foreground="Green" CommandParameter="d"  Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Controls:MetroWindow}} ,Path=DataContext.OpenCommand}">
+                    <Rectangle Width="20" Height="20" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                        <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_add}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+
+                    <Button Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Foreground="Red" Command="{Binding CloseComponet}">
+                        <Rectangle Width="20" Height="20" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_close}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                 </Button>
+
+            </StackPanel>
+            
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="20,0,5,0" Orientation="Horizontal" >
+
+                    <Controls:ToggleSwitch x:Name="enabledSwitch_Step"
+                                   FontSize="{StaticResource ContentFontSize}"
+                                   Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
+                                   Margin="{StaticResource ControlMargin}"
+                                   IsChecked="{Binding Path=IsStepVisible, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Controls:MetroWindow}}}"
+                                   OffLabel="ステップ非表示 "
+                                   OnLabel="ステップ表示 "/>
+                
+                    <Controls:ToggleSwitch x:Name="enabledSwitch"                                           
+                                   FontSize="{StaticResource ContentFontSize}"
+                                   Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
+                                   Margin="{StaticResource ControlMargin}"
+                                   IsChecked="{Binding Path=IsReportVisible, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Controls:MetroWindow}}}"
+                                   OffLabel="レポート非表示 "
+                                   OnLabel="レポート表示 "/>
+
+                    
+
+
+             </StackPanel>
+
+        </Grid>
+        </Border>
+
+        <Border BorderThickness="1" BorderBrush="{StaticResource BorderLine}" Grid.Row="1" Margin="1" Visibility="{Binding Path=HasComponets, Converter={StaticResource boolToVisibility}}">
+           
+            
+          
+
+                <!--ItemsSource="{Binding Path=CwxComponets}"-->
+                <!--<local:MyTreeView 
+                                  Style="{StaticResource VirtualisedMetroTreeView}" 
+                                  SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"
+                                  ItemTemplate="{DynamicResource ExamplesDataTemplate}"
+                                  ItemContainerStyle="{StaticResource TreeViewItemHeaderStyle}"
+                                  SelectedValuePath="Component/Name">
+
+                    <TreeView.ItemsSource>
+                        <Binding Source="{StaticResource Components}" XPath="*"/>
+                    </TreeView.ItemsSource>
+                    --><!--<TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Changes}">
+                            <Border Background="{DynamicResource FlatButtonBackgroundBrush}">
+                                <Label  Content="{Binding ComponentName}" FontSize="14" FontWeight="Bold" />                                
+                            </Border>
+                            
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource DashLine}">
+                                        
+                                        <StackPanel>
+                                            <TextBlock  Text="{Binding No}" Foreground="Blue"/>
+                                            <TextBlock  Text="{Binding Row1}" ToolTip="{Binding Row1}" FontSize="{DynamicResource TreeViewLeafFontSize}"/>
+                                            <TextBlock  Text="{Binding Row2}" ToolTip="{Binding Row2}"  FontSize="{DynamicResource TreeViewLeafFontSize}"/>
+                                            <TextBlock  Text="{Binding Row3}" ToolTip="{Binding Row3}"  FontSize="{DynamicResource TreeViewLeafFontSize}"/>
+                                            <TextBlock  Text="{Binding Row4}" ToolTip="{Binding Row4}"  FontSize="{DynamicResource TreeViewLeafFontSize}"/>
+                                        </StackPanel>
+                                    </Border>
+                                    
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>--><!--
+                    
+                    
+                </local:MyTreeView>-->
+                <local:MyTreeView x:Name="TreeNavi"
+                KeyboardNavigation.DirectionalNavigation="Cycle" 
+                BorderBrush="Transparent"
+                Background="Transparent"
+                SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"
+                ItemTemplate="{DynamicResource ExamplesDataTemplate}"
+                ItemContainerStyle="{StaticResource TreeViewItemHeaderStyle}"
+                ItemsSource="{Binding Path=CwxComponets}"  >
+                    
+                    <!--<TreeView.ItemsSource>
+                        <Binding Source="{StaticResource Components}" XPath="*"/>
+                    </TreeView.ItemsSource>-->
+                    
+                </local:MyTreeView>
+
+           
+        </Border>
+
+    </Grid>
+    
+</UserControl>

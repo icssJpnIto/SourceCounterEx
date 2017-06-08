@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+ <VerNos xmlns="">
+    <VerNo Prefix="[PKG5.5_,_PKG">Ver5.5</VerNo>
+    <VerNo Prefix="[PKG6_,_PKG">Ver6.0</VerNo>
+    <VerNo Prefix="[PKG7_,_PKG">Ver7.0</VerNo>
+    <VerNo Prefix="[PKG8_,_PKG">Ver8.0</VerNo>
+    <VerNo Prefix="[PKG9_,_PKG">Ver9.0</VerNo>
+    <VerNo Prefix="[CTV_,_CTV">CTV</VerNo>
+    <VerNo Prefix="[KFB_,_KFB">KFB</VerNo>
+    <VerNo Prefix="[CBC_,_CBC">CBC</VerNo>
+    <VerNo Prefix="[TRINITY1_,_TRINITY">TRINITY</VerNo>
+    <VerNo Prefix="[KKT改修,KKT改修">KKT</VerNo>
+    <VerNo Prefix="[ANN1_,_ANN">ANN</VerNo>
+    <VerNo Prefix="[PKG_,_PKG">RadioPKG</VerNo>
+   
+    
+</VerNos>

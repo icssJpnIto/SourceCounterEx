@@ -1,0 +1,33 @@
+﻿[
+
+  {
+    "Include": true,
+    "Category": "Java",
+    "FileTypes": ".java",
+    "SingleLineComment": "//",
+    "MultilineCommentStart": "/*",
+    "MultilineCommentEnd": "*/",
+    "ChgStart": "▼",
+    "ChgEnd": "▲"
+  },
+  {
+    "Include": true,
+    "Category": "VB",
+    "FileTypes": ".vb,.vbs,.frm,.bas,.cls",
+    "SingleLineComment": "'",
+    "MultilineCommentStart": "",
+    "MultilineCommentEnd": "",
+    "ChgStart": "▼",
+    "ChgEnd": "▲"
+  },
+  {
+    "Include": true,
+    "Category": "C#",
+    "FileTypes": ".cs",
+    "SingleLineComment": "//",
+    "MultilineCommentStart": "/*",
+    "MultilineCommentEnd": "*/",
+    "ChgStart": "▼",
+    "ChgEnd": "▲"
+  },
+]
