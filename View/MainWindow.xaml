@@ -75,7 +75,7 @@
                                 Orientation="Vertical">
 
 
-                        <GroupBox Header="統計対象">
+                        <GroupBox Header="{DynamicResource multilang_001}">
 
                           
 
@@ -95,14 +95,14 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="統計対象"  Grid.Row="0" Grid.Column="0" Margin="{StaticResource ControlMargin}"/>
+                                <TextBlock Text="{DynamicResource multilang_001}"  Grid.Row="0" Grid.Column="0" Margin="{StaticResource ControlMargin}"/>
                                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal"  Margin="{StaticResource ControlMargin}">
 
-                                        <RadioButton Content="全体" GroupName="1" x:Name="rdbtnObjAll" IsChecked="{Binding IsAll}"/>
-                                        <RadioButton Margin="10,0,0,0" Content="改修分のみ" GroupName="1" IsChecked="True"  x:Name="rdbtnObjChg"/>
+                                    <RadioButton Content="{DynamicResource multilang_002}" GroupName="1" x:Name="rdbtnObjAll" IsChecked="{Binding IsAll}"/>
+                                    <RadioButton Margin="10,0,0,0" Content="{DynamicResource multilang_003}" GroupName="1" IsChecked="True"  x:Name="rdbtnObjChg"/>
                                     </StackPanel>
 
-                                    <TextBlock Text="バージョンNo"  Grid.Row="1" Grid.Column="0" Margin="{StaticResource ControlMargin}" IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}"/>
+                                <TextBlock Text="{DynamicResource multilang_004}"  Grid.Row="1" Grid.Column="0" Margin="{StaticResource ControlMargin}" IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}"/>
                                     <ComboBox Controls:TextBoxHelper.ClearTextButton="True"
                                         Controls:TextBoxHelper.UseFloatingWatermark="True"
                                         IsEditable="True" 
@@ -111,35 +111,35 @@
                                         SelectedValue="{Binding VerNoPrefixSuffix}"
                                         ItemsSource="{Binding Source={StaticResource lstVerNo}, XPath=VerNos/VerNo}" Grid.Row="1" Grid.Column="1" Width="200" Margin="{StaticResource ControlMargin2}"
                                                IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}"/>
-                                    <TextBlock Text="凡例：Ver6.0 CTV"  Foreground="DarkRed"  Grid.Row="1" Grid.Column="2" Margin="{StaticResource ControlMargin}"  IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}"/>
+                                <TextBlock Text="{DynamicResource multilang_005}"  Foreground="DarkRed"  Grid.Row="1" Grid.Column="2" Margin="{StaticResource ControlMargin}"  IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}"/>
 
-                                    <TextBlock Text="区分"  Grid.Row="2" Grid.Column="0" Margin="{StaticResource ControlMargin}"  IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}"/>
+                                <TextBlock Text="{DynamicResource multilang_006}"  Grid.Row="2" Grid.Column="0" Margin="{StaticResource ControlMargin}"  IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}"/>
 
                                 <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal"  Margin="{StaticResource ControlMargin}"  IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}">
 
-                                    <CheckBox  Content="障害対応" IsChecked="{Binding IsBugChg}"/>
-                                    <CheckBox  Content="カスト書対応" IsChecked="{Binding IsNewChg}" Margin="10,0,0,0"/>
+                                    <CheckBox  Content="{DynamicResource multilang_007}" IsChecked="{Binding IsBugChg}"/>
+                                    <CheckBox  Content="{DynamicResource multilang_008}" IsChecked="{Binding IsNewChg}" Margin="10,0,0,0"/>
                                 </StackPanel>
 
-                                <TextBlock Text="履歴ファイル"  Grid.Row="3" Grid.Column="0" Margin="{StaticResource ControlMargin}"  IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}"/>
+                                <TextBlock Text="{DynamicResource multilang_009}"  Grid.Row="3" Grid.Column="0" Margin="{StaticResource ControlMargin}"  IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}"/>
 
                                 <StackPanel Grid.Row="3" Grid.Column="1"  Grid.ColumnSpan="3" Orientation="Horizontal"  Margin="{StaticResource ControlMargin}"  IsEnabled="{Binding ElementName=rdbtnObjChg,Path=IsChecked}">
 
-                                    <RadioButton  Content="Revサブフォルダを自動にスキャンする" IsChecked="{Binding IsRevScan}" />
-                                    <RadioButton  Content="ファイル名を指定する"  x:Name="rdbtnRevSet" Margin="10,0,0,0"/>
+                                    <RadioButton  Content="{DynamicResource multilang_010}" IsChecked="{Binding IsRevScan}" />
+                                    <RadioButton  Content="{DynamicResource multilang_011}"  x:Name="rdbtnRevSet" Margin="10,0,0,0"/>
                                     
                                     
                                 </StackPanel>
 
-                                <TextBlock Text="改修履歴ヘッダファイル"  Grid.Row="4" Grid.Column="0" Margin="{StaticResource ControlMargin}"  
+                                <TextBlock Text="{DynamicResource multilang_012}"  Grid.Row="4" Grid.Column="0" Margin="{StaticResource ControlMargin}"  
                                            IsEnabled="{Binding ElementName=rdbtnRevSet,Path=IsChecked}"/>
                                 <TextBox Controls:TextBoxHelper.ClearTextButton="True" 
                                          Controls:TextBoxHelper.UseFloatingWatermark="True" 
                                          Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
                                          IsEnabled="{Binding ElementName=rdbtnRevSet,Path=IsChecked}" 
                                          Margin="10,0,0,0" Text="{Binding RevSetFileName}" 
-                                         Controls:TextBoxHelper.Watermark="未指定する場合はデフォルトファイル名を使用する"
-                                         ToolTip="デフォルトファイル名: bj→*Obj.java ｜ bs:→.java ｜ ue→Main.bas ｜ ud→Main.bas ｜ up:M_Main.vb"
+                                         Controls:TextBoxHelper.Watermark="{DynamicResource multilang_013}"
+                                         ToolTip="{DynamicResource multilang_014}"
                                          MinWidth="280"/>
 
                             </Grid>
@@ -154,7 +154,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />                            
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="1" Style="{DynamicResource MetroFlatButton}" Margin="5" IsCancel="True" Content="閉じる" Click="TopFlyoutCloseButtonOnClick" />
+                        <Button Grid.Column="1" Style="{DynamicResource MetroFlatButton}" Margin="5" IsCancel="True" Content="{DynamicResource multilang_015}" Click="TopFlyoutCloseButtonOnClick" />
                     </Grid>
                 </Grid>
             </Controls:Flyout>
@@ -182,24 +182,30 @@
                   VerticalAlignment="Stretch">
 
 
-                    <MenuItem Header="ファイル(_F)">
-                        <MenuItem  Header="ディレクトリを開く…(_O)" Command="{Binding OpenCommand}" CommandParameter="d" />
-                        <MenuItem  Header="帳票ファイルを開く…(_E)" Command="{Binding OpenCommand}" CommandParameter="f" />
+                    <MenuItem Header="{DynamicResource multilang_101}">
+                        <MenuItem  Header="{DynamicResource multilang_102}" Command="{Binding OpenCommand}" CommandParameter="d" />
+                        <MenuItem  Header="{DynamicResource multilang_103}" Command="{Binding OpenCommand}" CommandParameter="f" />
                         <Separator />
-                        <MenuItem  Header="終了(_X)" Command="{Binding ExitCommand}" />
+                        <MenuItem  Header="{DynamicResource multilang_104}" Command="{Binding ExitCommand}" />
                     </MenuItem>
 
-                    <MenuItem Header="操作(_O)">
+                    <MenuItem Header="{DynamicResource multilang_105}">
+                        <MenuItem Header="{DynamicResource multilang_106}">
+                            <MenuItem  Header="{DynamicResource multilang_107}" Command="{Binding ChangeLanguageCommand}" CommandParameter="cn" />
+                            <MenuItem  Header="{DynamicResource multilang_108}" Command="{Binding ChangeLanguageCommand}" CommandParameter="jp" />
+                        </MenuItem>
+                       
+                       
                     </MenuItem>
 
-                    <MenuItem Header="表示(_V)">
+                    <MenuItem Header="{DynamicResource multilang_109}">
                     </MenuItem>
 
-                    <MenuItem Header="設定(_S)">
-                        <MenuItem  Header="統計対象…(_V)" Click="ShowTop" />
+                    <MenuItem Header="{DynamicResource multilang_110}">
+                        <MenuItem  Header="{DynamicResource multilang_111}" Click="ShowTop" />
                     </MenuItem>
 
-                    <MenuItem Header="ヘルプ(_H)">
+                    <MenuItem Header="{DynamicResource multilang_112}">
                     </MenuItem>
                 </Menu>
 
@@ -225,7 +231,7 @@
                                     <Expander.Header>
                                         <TextBlock Foreground="#99000000"
                                         FontWeight="Bold" FontSize="14pt" 
-                                        Text="ソースディレクトリ" >
+                                        Text="{DynamicResource multilang_201}" >
                                             <TextBlock.LayoutTransform>
                                                 <RotateTransform Angle="90" />
                                             </TextBlock.LayoutTransform>
@@ -270,7 +276,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <Rectangle Width="8" Fill="{StaticResource ArticleBrush1}" Grid.Column="0"/>
-                                        <Label Content="ステップ" Style="{DynamicResource DescriptionHeaderStyle}" Grid.Column="1"  />
+                                    <Label Content="{DynamicResource multilang_202}" Style="{DynamicResource DescriptionHeaderStyle}" Grid.Column="1"  />
                                     </Grid>
 
                                     <Border BorderThickness="1" BorderBrush="{StaticResource BorderLine}" Grid.Row="1" Margin="1"  >
@@ -293,7 +299,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <Rectangle Width="8" Fill="{StaticResource ArticleBrush1}" Grid.Column="0"/>
-                                        <Label Content="レポート" Style="{DynamicResource DescriptionHeaderStyle}" Grid.Column="1"  />
+                                    <Label Content="{DynamicResource multilang_203}" Style="{DynamicResource DescriptionHeaderStyle}" Grid.Column="1"  />
 
                                     </Grid>
 
@@ -316,20 +322,20 @@
 
 
                 <StatusBar Grid.Row="2">
-                    <StatusBarItem>カウント対象を追加してください</StatusBarItem>
+                    <StatusBarItem Content="{DynamicResource multilang_301}"/>
 
                     <Separator Margin="115,0,0,0" Style="{StaticResource MetroStatusBarSeparator}" />
-                    <StatusBarItem>統計対象:</StatusBarItem>
+                    <StatusBarItem Content="{DynamicResource multilang_302}"/>
 
                     <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=rdbtnObjAll,Path=IsChecked,Converter={StaticResource boolToVisibility}}">
-                        <StatusBarItem Content="全体（通常のステップカウント）" />
+                        <StatusBarItem Content="{DynamicResource multilang_303}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=rdbtnObjChg,Path=IsChecked,Converter={StaticResource boolToVisibility}}">
 
                         <StatusBarItem Content="{Binding VerNo, Mode=OneWay}" />
-                        <StatusBarItem Content="障害対応"  Visibility="{Binding IsBugChg,Converter={StaticResource boolToVisibility}}"/>
-                        <StatusBarItem Content="カスト書対応"   Visibility="{Binding IsNewChg,Converter={StaticResource boolToVisibility}}"/>
+                        <StatusBarItem Content="{DynamicResource multilang_304}"  Visibility="{Binding IsBugChg,Converter={StaticResource boolToVisibility}}"/>
+                        <StatusBarItem Content="{DynamicResource multilang_305}"   Visibility="{Binding IsNewChg,Converter={StaticResource boolToVisibility}}"/>
 
                     </StackPanel>
 

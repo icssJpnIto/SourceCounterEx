@@ -122,6 +122,14 @@
     <Compile Include="View\NaviView.xaml.cs">
       <DependentUpon>NaviView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resource\cn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\jp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

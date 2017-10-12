@@ -27,7 +27,7 @@ namespace SourceCounterEx.View
 
 
         public static readonly DependencyProperty IsReportVisibleProperty =
-            DependencyProperty.Register("IsReportVisible", typeof(Boolean), typeof(MainWindow), new PropertyMetadata(true));
+            DependencyProperty.Register("IsReportVisible", typeof(Boolean), typeof(MainWindow), new PropertyMetadata(false));
 
         public Boolean IsReportVisible
         {

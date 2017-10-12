@@ -81,7 +81,7 @@ namespace SourceCounterEx.ViewModels
         #endregion
 
         #region IsAll
-        bool _IsAll = false;
+        bool _IsAll = true;
         public bool IsAll
         {
             get { return this._IsAll; }
@@ -284,11 +284,13 @@ namespace SourceCounterEx.ViewModels
                 if (_openCommand == null)
                 {
                     _openCommand = new RelayCommand<string>((p) => OnOpen(p));
+                   
                 }
 
                 return _openCommand;
             }
         }
+        
         #endregion
 
         #region Drop
@@ -960,7 +962,35 @@ namespace SourceCounterEx.ViewModels
             return;
         }
 
+        #region Change Language
+        private RelayCommand changeLanguageCommand;
+        /// <summary>
+        /// Change Language
+        /// </summary>
+        public ICommand ChangeLanguageCommand
+        {
+            get
+            {
+                if (this.changeLanguageCommand == null)
+                {
+                    this.changeLanguageCommand = new RelayCommand<string>((p) => ChangeLanguage(p));
+                }
+
+                return this.changeLanguageCommand;
+            }
+        }
+
+        private void ChangeLanguage(string p)
+        {
+            
+            ResourceDictionary rd = System.Windows.Application.Current.Resources.MergedDictionaries.LastOrDefault<ResourceDictionary>();
+            rd.Source=new System.Uri(string.Format("Resource\\{0}.xaml",p), System.UriKind.Relative);
 
 
-    }
+        }
+            #endregion
+
+
+
+        }
 }

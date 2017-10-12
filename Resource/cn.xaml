@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SourceCounterEx.Resource"
+                    xmlns:sys='clr-namespace:System;assembly=mscorlib'>
+    
+    <sys:String x:Key="multilang_001">统计目标</sys:String>
+    <sys:String x:Key="multilang_002">全部</sys:String>
+    <sys:String x:Key="multilang_003">修正部分</sys:String>
+    <sys:String x:Key="multilang_004">版本号</sys:String>
+    <sys:String x:Key="multilang_005">例子：Ver6.0 CTV</sys:String>
+    <sys:String x:Key="multilang_006">类型</sys:String>
+    <sys:String x:Key="multilang_007">BUG修正</sys:String>
+    <sys:String x:Key="multilang_008">式样书对应</sys:String>
+    <sys:String x:Key="multilang_009">履历文件</sys:String>
+    <sys:String x:Key="multilang_010">自动搜索Rev子目录</sys:String>
+    <sys:String x:Key="multilang_011">指定文件名</sys:String>
+    <sys:String x:Key="multilang_012">修正履历头文件</sys:String>
+    <sys:String x:Key="multilang_013">没有指定则使用缺省文件</sys:String>
+    <sys:String x:Key="multilang_014">缺省文件名: bj→*Obj.java ｜ bs:→.java ｜ ue→Main.bas ｜ ud→Main.bas ｜ up:M_Main.vb</sys:String>
+    <sys:String x:Key="multilang_015">关闭</sys:String>
+
+    <sys:String x:Key="multilang_101">打开(_O)</sys:String>
+    <sys:String x:Key="multilang_102">目录…(_D)</sys:String>
+    <sys:String x:Key="multilang_103">文件…(_F)</sys:String>
+    <sys:String x:Key="multilang_104">关闭(_X)</sys:String>
+    <sys:String x:Key="multilang_105">设置(_S)</sys:String>
+    <sys:String x:Key="multilang_106">语言</sys:String>
+    <sys:String x:Key="multilang_107">中文…(_C)</sys:String>
+    <sys:String x:Key="multilang_108">日语…(_J)</sys:String>
+    <sys:String x:Key="multilang_109">表示(_V)</sys:String>
+    <sys:String x:Key="multilang_110">统计(_T)</sys:String>
+    <sys:String x:Key="multilang_111">统计范围…(_V)</sys:String>
+    <sys:String x:Key="multilang_112">帮助(_H)</sys:String>
+
+
+    <sys:String x:Key="multilang_201">文件目录</sys:String>
+    <sys:String x:Key="multilang_202">代码行数</sys:String>
+    <sys:String x:Key="multilang_203">结果报告</sys:String>
+
+    <sys:String x:Key="multilang_301">请增加需要统计的文件或目录</sys:String>
+    <sys:String x:Key="multilang_302">统计范围:</sys:String>
+    <sys:String x:Key="multilang_303">全部（正常的代码行统计）</sys:String>
+    <sys:String x:Key="multilang_304">BUG修正</sys:String>
+    <sys:String x:Key="multilang_305">式样书对应</sys:String>
+
+    <sys:String x:Key="multilang_401">代码行数非表示</sys:String>
+    <sys:String x:Key="multilang_402">代码行数表示</sys:String>
+    <sys:String x:Key="multilang_403">结果报告非表示</sys:String>
+    <sys:String x:Key="multilang_404">结果报告表示</sys:String>
+
+    <sys:String x:Key="multilang_601">改修内容报告</sys:String>
+    <sys:String x:Key="multilang_602">■规模【实(总)】、比率</sys:String>
+    <sys:String x:Key="multilang_603">■详细</sys:String>
+</ResourceDictionary>

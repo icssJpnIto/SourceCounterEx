@@ -171,14 +171,16 @@
 
 
             <Paragraph Style="{StaticResource HeaderStyle}">
-                <Run>改修内容レポート</Run>
+                
+                <Run Text="{DynamicResource multilang_601}"/>
                 <Run Text="{Binding ComponentName, StringFormat=({0}),TargetNullValue=''}"/>
                 
             </Paragraph>
 
             <Section>
                 <Paragraph Style="{StaticResource TitleStyle}" >
-                    ■規模【実(総)】、比率
+                    
+                    <Run Text="{DynamicResource multilang_602}"/>
                 </Paragraph>
                 <Paragraph Style="{StaticResource IndetStyle}">
 
@@ -196,7 +198,7 @@
 
             <Section>
                 <Paragraph Style="{StaticResource TitleStyle}">
-                    ■詳細
+                    <Run Text="{DynamicResource multilang_603}"/>
                 </Paragraph>
 
                 <Paragraph Style="{StaticResource IndetStyle}">

@@ -148,16 +148,16 @@
                                    Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
                                    Margin="{StaticResource ControlMargin}"
                                    IsChecked="{Binding Path=IsStepVisible, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Controls:MetroWindow}}}"
-                                   OffLabel="ステップ非表示 "
-                                   OnLabel="ステップ表示 "/>
+                                   OffLabel="{DynamicResource multilang_401}"
+                                   OnLabel="{DynamicResource multilang_402}"/>
                 
                     <Controls:ToggleSwitch x:Name="enabledSwitch"                                           
                                    FontSize="{StaticResource ContentFontSize}"
                                    Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
                                    Margin="{StaticResource ControlMargin}"
                                    IsChecked="{Binding Path=IsReportVisible, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Controls:MetroWindow}}}"
-                                   OffLabel="レポート非表示 "
-                                   OnLabel="レポート表示 "/>
+                                   OffLabel="{DynamicResource multilang_403}"
+                                   OnLabel="{DynamicResource multilang_404}"/>
 
                     
 
