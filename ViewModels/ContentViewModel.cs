@@ -230,7 +230,7 @@ namespace SourceCounterEx.ViewModels
           
             if (!string.IsNullOrEmpty(cat.NameExclusions))
             {
-                if (cat.NameExclusions.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Any(s => thisFile.Name.ToLower(CultureInfo.CurrentCulture).Contains(s.ToLower(CultureInfo.CurrentCulture))))
+                if (cat.NameExclusions.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Any(s => thisFile.FullName.ToLower(CultureInfo.CurrentCulture).Contains(s.ToLower(CultureInfo.CurrentCulture))))
                 {
                     cat.ExcludedFiles++;
                     return;
@@ -311,9 +311,9 @@ namespace SourceCounterEx.ViewModels
 
             if (!string.IsNullOrEmpty(cat.NameExclusions))
             {
-                if (cat.NameExclusions.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Any(s => thisFile.Name.ToLower(CultureInfo.CurrentCulture).Contains(s.ToLower(CultureInfo.CurrentCulture))))
+                if (cat.NameExclusions.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Any(s => thisFile.FullName.ToLower(CultureInfo.CurrentCulture).Contains(s.ToLower(CultureInfo.CurrentCulture))))
                 {
-                    //cat.ExcludedFiles++;
+                    cat.ExcludedFiles++;
                     return;
                 }
             }
@@ -538,6 +538,7 @@ namespace SourceCounterEx.ViewModels
         }
         #endregion
 
-        
-    }
+      
+
+        }
 }

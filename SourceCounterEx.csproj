@@ -188,12 +188,9 @@
     <Content Include="AssemblyReferences\MahApps.Metro.dll" />
     <Content Include="AssemblyReferences\MahApps.Metro.Resources.dll" />
     <Content Include="AssemblyReferences\Newtonsoft.Json.dll" />
-    <Content Include="Images\clouds.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Resource Include="Images\steel.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\clouds.png" />
+    <Resource Include="Images\ico_copy.gif" />
+    <Resource Include="Images\steel.png" />
     <None Include="VerNo.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

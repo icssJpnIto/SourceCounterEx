@@ -75,9 +75,7 @@
                                 Orientation="Vertical">
 
 
-                        <GroupBox Header="{DynamicResource multilang_001}">
-
-                          
+                        <GroupBox Header="{DynamicResource multilang_001}">                          
 
                                 <Grid  Margin="{StaticResource ControlMargin}">
 
@@ -186,24 +184,30 @@
                         <MenuItem  Header="{DynamicResource multilang_102}" Command="{Binding OpenCommand}" CommandParameter="d" />
                         <MenuItem  Header="{DynamicResource multilang_103}" Command="{Binding OpenCommand}" CommandParameter="f" />
                         <Separator />
+                        <MenuItem  Header="{DynamicResource multilang_113}"  Command="{Binding SaveCommand}" CommandParameter="csv" />
+                        <Separator />
+                        <MenuItem  Header="{DynamicResource multilang_114}"   Command="{Binding SaveCommand}" CommandParameter="copycurrent" />
+                        <MenuItem  Header="{DynamicResource multilang_115}"   Command="{Binding SaveCommand}" CommandParameter="copyselected" />
+                        <Separator />
                         <MenuItem  Header="{DynamicResource multilang_104}" Command="{Binding ExitCommand}" />
                     </MenuItem>
 
                     <MenuItem Header="{DynamicResource multilang_105}">
+                        
                         <MenuItem Header="{DynamicResource multilang_106}">
                             <MenuItem  Header="{DynamicResource multilang_107}" Command="{Binding ChangeLanguageCommand}" CommandParameter="cn" />
                             <MenuItem  Header="{DynamicResource multilang_108}" Command="{Binding ChangeLanguageCommand}" CommandParameter="jp" />
                         </MenuItem>
-                       
-                       
+                        <MenuItem  Header="{DynamicResource multilang_111}" Click="ShowTop" />
+
                     </MenuItem>
 
                     <MenuItem Header="{DynamicResource multilang_109}">
                     </MenuItem>
 
-                    <MenuItem Header="{DynamicResource multilang_110}">
+                    <!--<MenuItem Header="{DynamicResource multilang_110}">
                         <MenuItem  Header="{DynamicResource multilang_111}" Click="ShowTop" />
-                    </MenuItem>
+                    </MenuItem>-->
 
                     <MenuItem Header="{DynamicResource multilang_112}">
                     </MenuItem>

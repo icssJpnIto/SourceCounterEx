@@ -35,6 +35,29 @@
                 </Style.Triggers>
             </Style>-->
 
+            <Style x:Key="SumColStyle" TargetType="TextBlock">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="SumRowHeadStyle" TargetType="TextBlock">
+                <Setter Property="Background" Value="Red"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="dgCell_R" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Right"/>
+            </Style>
+            <Style x:Key="dgCell_L" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Left"/>
+            </Style>
+            <Style x:Key="dgCell_C" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
+
+
 
             <DataTemplate x:Key="TabContent">
 
@@ -52,7 +75,7 @@
                           GridLinesVisibility="All"
                           ItemsSource="{Binding Statistics}"
                           SelectionUnit="FullRow"
-                          Style="{DynamicResource AzureDataGrid}" AlternationCount="2">
+                          Style="{DynamicResource AzureDataGrid}" AlternationCount="2" SelectedItem="{Binding SelectedItem}">
 
                             <!--<DataGrid.RowStyle>
                                 <Style TargetType="{x:Type DataGridRow}">
@@ -69,14 +92,49 @@
                             </DataGrid.RowStyle>-->
                             
                             <DataGrid.Columns>
-                                
-                                <DataGridTextColumn  Binding="{Binding FileName}"  Header="ファイル名" FontSize="{StaticResource ResultFontSize}">
+
+                                <DataGridTextColumn Binding="{Binding FileName}"   FontSize="{StaticResource ResultFontSize}" Width="250" ElementStyle="{StaticResource dgCell_L}">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{DynamicResource multilang_501}"/>
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Binding="{Binding Type}"  Header="種別"  FontSize="{StaticResource ResultFontSize}"/>
-                                <DataGridTextColumn Binding="{Binding FactStep}"  Header="実行ステップ"  FontSize="{StaticResource ResultFontSize}"/>
-                                <DataGridTextColumn Binding="{Binding CommentStep}"  Header="コメント" FontSize="{StaticResource ResultFontSize}"/>
-                                <DataGridTextColumn Binding="{Binding SpaceStep}"  Header="空白"  FontSize="{StaticResource ResultFontSize}"/>
-                                <DataGridTextColumn Binding="{Binding SumStep}"  Header="総ステップ" FontSize="{StaticResource ResultFontSize}"/>
+                                <DataGridTextColumn Binding="{Binding Type}"   FontSize="{StaticResource ResultFontSize}" Width="100" ElementStyle="{StaticResource dgCell_C}">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{DynamicResource multilang_502}"/>
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding FactStep}"   FontSize="{StaticResource ResultFontSize}" Width="100" ElementStyle="{StaticResource dgCell_R}">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{DynamicResource multilang_503}"/>
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding CommentStep}"  FontSize="{StaticResource ResultFontSize}" Width="100" ElementStyle="{StaticResource dgCell_R}">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{DynamicResource multilang_504}"/>
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding SpaceStep}"   FontSize="{StaticResource ResultFontSize}" Width="100" ElementStyle="{StaticResource dgCell_R}">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{DynamicResource multilang_505}"/>
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding SumStep}"   FontSize="{StaticResource ResultFontSize}" Width="100" ElementStyle="{StaticResource dgCell_R}">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{DynamicResource multilang_506}"/>
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
                                 
                             </DataGrid.Columns>
 
@@ -84,7 +142,8 @@
                                 <Style TargetType="DataGridColumnHeader">
 
                                     <Setter Property="FontSize" Value="{StaticResource ResultFontSize}"/>
-                                    
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
                                 </Style>
                             </DataGrid.ColumnHeaderStyle>
 
@@ -101,30 +160,41 @@
                                 <RowDefinition/>                                
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="*"/>
 
                             </Grid.ColumnDefinitions>
                             
                             <TextBlock Grid.Row="0" Grid.Column="0" />
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="ファイル数" TextAlignment="Right"/>
-                            <TextBlock Grid.Row="0" Grid.Column="2" Text="実行ステップ" TextAlignment="Right"/>
-                            <TextBlock Grid.Row="0" Grid.Column="3" Text="コメント" TextAlignment="Right"/>
-                            <TextBlock Grid.Row="0" Grid.Column="4" Text="空白" TextAlignment="Right"/>
-                            <TextBlock Grid.Row="0" Grid.Column="5" Text="総ステップ" TextAlignment="Right"/>
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="合   計" Foreground="White" Background="Red" TextAlignment="Center" Margin="1,0,0,0" />
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding FileCount}" Foreground="White" Background="Black" TextAlignment="Right" />
-                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Sum_FactStep}" Foreground="White" Background="Black" TextAlignment="Right" />
-                            <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Sum_CommentStep}" Foreground="White" Background="Black" TextAlignment="Right"/>
-                            <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding Sum_SpaceStep}" Foreground="White" Background="Black" TextAlignment="Right" />
-                            <TextBlock Grid.Row="1" Grid.Column="5" Text="{Binding Sum_SumStep}" Foreground="White" Background="Black" TextAlignment="Right" />
-                            <TextBlock Grid.Row="1" Grid.Column="6"  Foreground="White" Background="Black" Margin="0,0,1,0"/>
+                            <CheckBox Grid.Row="0" Grid.Column="1"  Content="{DynamicResource multilang_507}" HorizontalAlignment="Center" IsChecked="{Binding Chk_FileCount}"/>
+                            <CheckBox Grid.Row="0" Grid.Column="2" Content="{DynamicResource multilang_503}"  HorizontalAlignment="Center"  IsChecked="{Binding Chk_Sum_FactStep}"/>
+                            <CheckBox Grid.Row="0" Grid.Column="3" Content="{DynamicResource multilang_504}" HorizontalAlignment="Center"  IsChecked="{Binding Chk_Sum_CommentStep}"/>
+                            <CheckBox Grid.Row="0" Grid.Column="4" Content="{DynamicResource multilang_505}" HorizontalAlignment="Center"  IsChecked="{Binding Chk_Sum_SpaceStep}"/>
+                            <CheckBox Grid.Row="0" Grid.Column="5" Content="{DynamicResource multilang_506}" HorizontalAlignment="Center" IsChecked="{Binding Chk_Sum_SumStep}"/>
+
+
+                            <Button  Grid.Row="0" Grid.Column="6"  HorizontalAlignment="Right" Command="{Binding CopyCommand}">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Rectangle  Style="{StaticResource ContetCoypStyle}"  >
+                                        </Rectangle>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource multilang_508}" Style="{StaticResource SumRowHeadStyle}" Margin="1,0,0,0" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding FileCount}" Style="{StaticResource SumColStyle}" />
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Sum_FactStep}" Style="{StaticResource SumColStyle}" />
+                            <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Sum_CommentStep}" Style="{StaticResource SumColStyle}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding Sum_SpaceStep}" Style="{StaticResource SumColStyle}" />
+                            <TextBlock Grid.Row="1" Grid.Column="5" Text="{Binding Sum_SumStep}" Style="{StaticResource SumColStyle}" />
+                            <TextBlock Grid.Row="1" Grid.Column="6"  Style="{StaticResource SumColStyle}" Margin="0,0,1,0"/>
 
                         </Grid>
                     </Border>

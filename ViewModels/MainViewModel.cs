@@ -283,14 +283,35 @@ namespace SourceCounterEx.ViewModels
             {
                 if (_openCommand == null)
                 {
-                    _openCommand = new RelayCommand<string>((p) => OnOpen(p));
+                    _openCommand = new RelayCommand<string>((p) => OnOpen(p), (p) => CanOpen(p));
                    
                 }
 
                 return _openCommand;
             }
         }
-        
+
+        private bool CanOpen(string p)
+        {
+            if (p.Equals("f") )
+            {
+                if (this._IsAll)
+                {
+                    return false;
+                }else
+                {
+                    return true;
+                }
+
+            }
+            else
+            {
+
+                return true;
+            }
+
+
+        }
         #endregion
 
         #region Drop
@@ -326,8 +347,11 @@ namespace SourceCounterEx.ViewModels
                     }
                     else if (System.IO.File.Exists(item))
                     {
-
-                        OnOpenFile(item);
+                        if (!this._IsAll)
+                        {
+                            OnOpenFile(item);
+                        }
+                        
 
                     }
                 }
@@ -417,6 +441,10 @@ namespace SourceCounterEx.ViewModels
                     this._ContentViewModel.ScanFinish();
                     this.IsProgress = false;
 
+                }, TaskScheduler.FromCurrentSynchronizationContext()).ContinueWith(_=> {
+
+                    this._NaviViewModel.SelectLast();
+
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             
 
@@ -432,7 +460,7 @@ namespace SourceCounterEx.ViewModels
             string sResult = string.Empty;
             string sRevFolder = string.Empty;
 
-
+            
             if (this._IsRevScan)
             {
 
@@ -988,9 +1016,110 @@ namespace SourceCounterEx.ViewModels
 
 
         }
-            #endregion
+        #endregion
 
+        #region Save 
+        private RelayCommand saveCommand;
+        /// <summary>
+        /// Change Language
+        /// </summary>
+        public ICommand SaveCommand
+        {
+            get
+            {
+                if (this.saveCommand == null)
+                {
+                    this.saveCommand = new RelayCommand<string>((p) => Save(p),(p)=> CanSave(p));
+                }
+
+                return this.saveCommand;
+            }
+        }
+
+        private void Save(string p)
+        {
+
+           
+            if (p.Equals("copycurrent"))
+            {
+               
+                string compName = this.ContentViewModel.SelectedItem.ComponentName;
+                CwxStatistic result =this.ContentViewModel.ComponentStatistics.FirstOrDefault(item => item.ComponentName.Equals(compName));
+                System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() => System.Windows.Clipboard.SetDataObject(result.ToString())));
+                return;
+
+            }
+
+            if (p.Equals("copyselected"))
+            {
+                string compName = this.ContentViewModel.SelectedItem.ComponentName;
+                CwxStatistic result = this.ContentViewModel.ComponentStatistics.FirstOrDefault(item => item.ComponentName.Equals(compName));
+
+                if(result.SelectedItem is Statistics)
+                {
+                    Statistics selecteditem = (Statistics)result.SelectedItem;
+                    StringBuilder strBuf = new StringBuilder();
+
+                    strBuf.AppendFormat("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"\r\n", "FileName", "Type", "FactStep", "SpaceStep", "CommentStep", "Sum");
+                    strBuf.AppendLine(selecteditem.ToString());
+                    System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() => System.Windows.Clipboard.SetDataObject(strBuf.ToString())));
+                    return;
+
+                } 
+            }
+
+            if (p.Equals("csv"))
+            {
+                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                
+                dlg.Title = "保守CSV文件";
+                dlg.RestoreDirectory = true;
+                dlg.Filter = "CSV文件|*.csv|任意文件|*.*";
+
+                if (dlg.ShowDialog().GetValueOrDefault())
+                {
+                    
+                    StringBuilder strBuf = new StringBuilder();
+                    this.ContentViewModel.ComponentStatistics.ToList().ForEach(item => {
+                        strBuf.AppendLine(string.Format("<{0}>",item.ComponentName));
+                        strBuf.Append(item.ToString());
+                        strBuf.AppendLine();
+
+                    });
+
+                    System.IO.File.WriteAllText(dlg.FileName, strBuf.ToString());
+                }
+
+            }
+        }
+
+        private bool CanSave(string p)
+        {
+            if (p.Equals("copyselected"))
+            {
+                if (this.ContentViewModel.ComponentStatistics.Count > 0)
+                {
+                    string compName = this.ContentViewModel.SelectedItem.ComponentName;
+                    CwxStatistic result = this.ContentViewModel.ComponentStatistics.FirstOrDefault(item => item.ComponentName.Equals(compName));
+                    return result.SelectedItem != null;
+
+                }else
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                
+                return this.ContentViewModel.ComponentStatistics.Count > 0;
+            }
 
 
         }
+        #endregion
+
+
+
+    }
 }

@@ -8,17 +8,19 @@
     "MultilineCommentStart": "/*",
     "MultilineCommentEnd": "*/",
     "ChgStart": "▼",
-    "ChgEnd": "▲"
+    "ChgEnd": "▲",
+    "NameExclusions":"obj,bin,AssemblyInfo"//目录名，文件名
   },
   {
     "Include": true,
     "Category": "VB",
-    "FileTypes": ".vb,.vbs,.frm,.bas,.cls",
+    "FileTypes": ".vb,.vbs,.frm,.bas,.cls,.ctl",
     "SingleLineComment": "'",
     "MultilineCommentStart": "",
     "MultilineCommentEnd": "",
     "ChgStart": "▼",
-    "ChgEnd": "▲"
+    "ChgEnd": "▲",
+    "NameExclusions":"obj,bin,AssemblyInfo"//目录名，文件名
   },
   {
     "Include": true,
@@ -28,6 +30,7 @@
     "MultilineCommentStart": "/*",
     "MultilineCommentEnd": "*/",
     "ChgStart": "▼",
-    "ChgEnd": "▲"
+    "ChgEnd": "▲",
+    "NameExclusions":"obj,bin,AssemblyInfo"//目录名，文件名
   },
 ]

@@ -362,7 +362,20 @@
                 <Setter Property="Paragraph.Margin" Value="5,10,5,10" />
             </Style>
 
-            
+            <ImageBrush x:Key="ContentCopy"   ImageSource="images/ico_copy.gif" />
+            <Style  x:Key="ContetCoypStyle">
+                <Setter Property="Rectangle.Width" Value="16" />
+                <Setter Property="Rectangle.Height" Value="16" />
+                <Setter Property="Rectangle.Fill" Value="{StaticResource ContentCopy}" />
+                <Setter Property="Rectangle.Opacity" Value="0.6"/>
+                <Style.Triggers>
+                    <Trigger Property="Rectangle.IsMouseOver" Value="True">
+                        <Setter Property="Rectangle.Opacity" Value="1.0"/>
+                    </Trigger>
+
+                </Style.Triggers>
+
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

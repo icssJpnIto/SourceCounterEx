@@ -50,7 +50,10 @@ namespace SourceCounterEx.ViewModels
             get { return this.CwxComponets_Outside; }
         }
 
-      
+        public void SelectLast()
+        {
+            this.SelectedItem=this.CwxComponets_Outside.LastOrDefault();
+        }
         #endregion
 
         #region SelectedItem
