@@ -32,6 +32,7 @@ namespace SourceCounterEx.ViewModels
         private readonly IDialogCoordinator _dialogCoordinator;
         private String sLastedForlder;
         private MainWindow _mainview;
+        private object lockObj = new object();
         public MainViewModel(IDialogCoordinator dialogCoordinator, MainWindow mainview)
         {
             _dialogCoordinator = dialogCoordinator;
@@ -285,6 +286,7 @@ namespace SourceCounterEx.ViewModels
                 {
                     _openCommand = new RelayCommand<string>((p) => OnOpen(p), (p) => CanOpen(p));
                    
+
                 }
 
                 return _openCommand;
@@ -324,11 +326,14 @@ namespace SourceCounterEx.ViewModels
                 if (_dropCommand == null)
                 {
                     _dropCommand = new RelayCommand<System.Windows.DragEventArgs>((p) => OnDrop(p));
+
                 }
 
                 return _dropCommand;
             }
         }
+
+       
         #endregion
 
         private void OnDrop(System.Windows.DragEventArgs e)
@@ -337,12 +342,15 @@ namespace SourceCounterEx.ViewModels
             {
 
                 string[] drags = e.Data.GetData(System.Windows.DataFormats.FileDrop) as string[];
-
-                foreach(string item in drags)
+                var sortedDrags = drags.OrderBy<string, string>(s => s);
+                
+                foreach (string item in sortedDrags)
                 {
                     if (System.IO.Directory.Exists(item))
                     {
+                        
                         OnOpenDir(item);
+                        
 
                     }
                     else if (System.IO.File.Exists(item))
@@ -350,17 +358,17 @@ namespace SourceCounterEx.ViewModels
                         if (!this._IsAll)
                         {
                             OnOpenFile(item);
-                        }
-                        
 
+                        }
                     }
                 }
+                
                 e.Handled = true;
             }
 
 
         }
-        
+
 
         /// <summary>
         /// Open Dir
@@ -371,7 +379,7 @@ namespace SourceCounterEx.ViewModels
 
             string sResult = string.Empty;
             string sRevFolder = string.Empty;
-            bool bChkRev =false;
+            bool bChkRev = false;
 
             //履歴ファイルを読み込む
             string cwxComp;
@@ -422,31 +430,38 @@ namespace SourceCounterEx.ViewModels
                 }
 
             }
-            
-            this.IsProgress = true;
-            
-            Task.Factory.StartNew(() => {
 
-                //履歴ファイルを読み込み
-                this._NaviViewModel.ProcessPathRevFile(cwxComp, sRevFilePath, sPrefix);
-                
-                //ステップをカウント
-                this._ContentViewModel.Scan(sdir, cwxComp, IsAll);
-                
-                
-            }).ContinueWith(_ =>
-                {
+            //履歴ファイルを読み込み
+            this._NaviViewModel.ProcessPathRevFile(cwxComp, sRevFilePath, sPrefix);
 
-                    this._NaviViewModel.ProcessPathRevFileFinish();
-                    this._ContentViewModel.ScanFinish();
-                    this.IsProgress = false;
+            //ステップをカウント
+            this._ContentViewModel.Scan(sdir, cwxComp, IsAll);
 
-                }, TaskScheduler.FromCurrentSynchronizationContext()).ContinueWith(_=> {
+            this._NaviViewModel.ProcessPathRevFileFinish();
+            this._ContentViewModel.ScanFinish();
+            this._NaviViewModel.SelectLast();
 
-                    this._NaviViewModel.SelectLast();
+           
+            //Task.Factory.StartNew(() => {
 
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-            
+            //    //履歴ファイルを読み込み
+            //    this._NaviViewModel.ProcessPathRevFile(cwxComp, sRevFilePath, sPrefix);
+
+            //    //ステップをカウント
+            //    this._ContentViewModel.Scan(sdir, cwxComp, IsAll);
+
+
+            //}).ContinueWith(t =>
+            //    {
+
+            //        this._NaviViewModel.ProcessPathRevFileFinish();
+            //        this._ContentViewModel.ScanFinish();
+            //        this._NaviViewModel.SelectLast();
+            //        this.IsProgress = false;
+
+
+            //    }, TaskScheduler.FromCurrentSynchronizationContext());
+
 
         }
 
@@ -474,9 +489,8 @@ namespace SourceCounterEx.ViewModels
             }          
 
 
-            this.IsProgress = true;
 
-            Task.Factory.StartNew(() => {
+            //Task.Factory.StartNew(() => {
 
                 
                 //VBAコードを抽出する
@@ -516,14 +530,14 @@ namespace SourceCounterEx.ViewModels
                 //ステップをカウント
                 this._ContentViewModel.Scan(System.IO.Path.Combine(sSaveTempPath, cwxComp), cwxComp, IsAll);
 
-            }).ContinueWith(_ =>
-            {
+            //}).ContinueWith(_ =>
+            //{
 
                 this._NaviViewModel.ProcessPathRevFileFinish();
                 this._ContentViewModel.ScanFinish();
-                this.IsProgress = false;
+                
 
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            //}, TaskScheduler.FromCurrentSynchronizationContext());
 
         }
 

@@ -38,7 +38,8 @@ namespace SourceCounterEx.ViewModels
 
 
         #region ComponentStatistics(コンポーネット単位の統計情報の集合)
-        private ObservableCollection<CwxStatistic> _ComponentStatistics = new ObservableCollection<CwxStatistic>();
+        private Dictionary<string,CwxStatistic> _ComponentStatistics = new Dictionary<string, CwxStatistic>();
+
         private ObservableCollection<CwxStatistic> ComponentStatistics_Binding = new ObservableCollection<CwxStatistic>();
         public ObservableCollection<CwxStatistic> ComponentStatistics
         {
@@ -72,7 +73,7 @@ namespace SourceCounterEx.ViewModels
         public void ScanFinish()
         {
 
-            foreach (CwxStatistic item in this._ComponentStatistics)
+            foreach (CwxStatistic item in this._ComponentStatistics.Values)
             {
                 this.ComponentStatistics_Binding.Add(item);
               
@@ -96,7 +97,7 @@ namespace SourceCounterEx.ViewModels
             foundFiles = dir.GetFiles("*", SearchOption.AllDirectories).Where(x =>(x.Attributes & FileAttributes.Hidden) == 0);
 
             //コンポーネット統計集合に追加
-            this._ComponentStatistics.Add(new CwxStatistic() { ComponentName = componet, Statistics = new ObservableCollection<Statistics>() });
+            this._ComponentStatistics.Add(componet,new CwxStatistic() { ComponentName = componet, Statistics = new ObservableCollection<Statistics>() });
 
             //コンポーネットブロック集合に追加
             this._CwxBlock.Add(new CwxBlock() { ComponentName = componet, Blocks = new ObservableCollection<Block>() });
@@ -112,12 +113,12 @@ namespace SourceCounterEx.ViewModels
                 {
                     this.ProcessPath(this.Categories[i],
                                     foundFiles,
-                                    this._ComponentStatistics.LastOrDefault().Statistics,
+                                    this._ComponentStatistics[componet].Statistics,
                                     null,
                                     null);
 
                     //合計
-                    this._ComponentStatistics.LastOrDefault().Sum();
+                    this._ComponentStatistics[componet].Sum();
                 }
                 else
                 {
@@ -125,7 +126,7 @@ namespace SourceCounterEx.ViewModels
 
                     if (this.ProcessPath(this.Categories[i],
                                         foundFiles,
-                                        this._ComponentStatistics.LastOrDefault().Statistics,
+                                        this._ComponentStatistics[componet].Statistics,
                                         chgs,
                                         this._CwxBlock.LastOrDefault().Blocks) > 0)
                     {
@@ -150,7 +151,7 @@ namespace SourceCounterEx.ViewModels
                             commentcount = this._CwxBlock.LastOrDefault().Blocks.Where(block => block.FileName.Equals(file)).Sum(block => block.Comments);
                             factcount = this._CwxBlock.LastOrDefault().Blocks.Where(block => block.FileName.Equals(file)).Sum(block => block.FactStep);
 
-                            this._ComponentStatistics.LastOrDefault().Statistics.Add(new Statistics
+                            this._ComponentStatistics[componet].Statistics.Add(new Statistics
                             {
                                 FileName = file,
                                 Type = this.Categories[i].Category,
@@ -164,7 +165,7 @@ namespace SourceCounterEx.ViewModels
                     }
                     
                     //合計
-                    this._ComponentStatistics.LastOrDefault().Sum();
+                    this._ComponentStatistics[componet].Sum();
 
                 }
                 
